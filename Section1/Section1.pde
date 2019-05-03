@@ -37,7 +37,8 @@ class Visualizer {
     //the values in the array.
     //Negative values are red, and go below the line.
     //Positive values are green and go above the line.
-
+    
+    float w = width / values.length; 
     //???WRITE THIS METHOD FIRST!!!
     //THESE ARE WRONG: They just illustrate how they could look
     fill(255, 0, 0);
