@@ -24,57 +24,43 @@ class Visualizer {
   void display() {
     fill(255);
     rect(x, y, 400, 200);
-    //This is a 200x400 box.
-    //The width of the visualizer is 400! This rect is the border
-
-    //the line is the 0 y-value, the top is 100, the bottom is -100
     line(x, y+100, x+400, y+100);
     
     float w = 400 / values.length; 
     float xcor = x; 
     
-    for (int i = 0; i < values.length; i ++) { 
-      float temp = abs (values[i]); 
-      if (values[i] < 0) { 
-        fill (255,0,0); 
-        rectMode (CORNERS); 
-        rect (xcor, y - temp, w, temp); 
-        xcor += w; 
+    for (float i: values) { 
+      float temp = abs (i); 
+      if (i < 0) { 
+        if (i > -50) { //orange
+          fill (255,128,0);
+        }
+        else { //red
+          fill (255,0,0); 
+        }
+        rect (xcor, y + 100, w, temp); 
       }
       else { 
-        fill (0, 255,0) ; 
-        rect (xcor, y + 100, w, temp); 
-        xcor += w; 
+        if (i < 50) { //yellow 
+          fill (255,255,0); 
+        }
+        else { //green
+          fill (0, 255, 0); 
+        }
+        rect (xcor,y + 100 - temp, w, temp); 
       }
+      xcor += w; 
     }
-    //You need to use a loop. You need to make the HEIGHT of the bars 
-    //the values in the array.
-    //Negative values are red, and go below the line.
-    //Positive values are green and go above the line.
-
-    //???WRITE THIS METHOD FIRST!!!
-    //THESE ARE WRONG: They just illustrate how they could look
-    
-    /*
-    fill(255, 0, 0);
-    rect(x+40, y+100, 60, 50);
-    fill(0, 255, 0);
-    rect(x+120, y+50, 60, 50);
-    */
-
-    //Width of the visualizer is 400!
-
   
   }
+  
   void update() {
-    //???WRITE THIS METHOD SECOND!!!
     for (int i = 0; i < values.length; i++) {
       values[i] += speeds[i]; //the speed updates the values. Do not touch this.
-      //??? keep them values between max/min value so they stay in the box.
-
-      //??? reverse the speeds so the bar oscillates up/down when it reaches max/min
-
       
+      if (values[i] > MAX_VALUE || values[i] < MIN_VALUE) { 
+        speeds[i] *= -1; 
+      }
     }
   }
 }
@@ -86,5 +72,5 @@ void setup() {
 void draw() {
   background(255);
   v.display();
-  //v.update();
+  v.update();
 }
