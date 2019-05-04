@@ -22,9 +22,6 @@ class Visualizer {
   }
 
   void display() {
-    //draw the bars equally spaced inside this box. 
-    //You can assume 10, but it would be even better 
-    //if you could modify it to be larger increments.
     fill(255);
     rect(x, y, 400, 200);
     //This is a 200x400 box.
@@ -32,20 +29,37 @@ class Visualizer {
 
     //the line is the 0 y-value, the top is 100, the bottom is -100
     line(x, y+100, x+400, y+100);
-
+    
+    float w = 400 / values.length; 
+    float xcor = x; 
+    
+    for (int i = 0; i < values.length; i ++) { 
+      float temp = abs (values[i]); 
+      if (values[i] < 0) { 
+        fill (255,0,0); 
+        rect (xcor, y - temp, w, temp); 
+        xcor += w; 
+      }
+      else { 
+        fill (0, 255,0) ; 
+        rect (xcor, y + 100, w, temp); 
+        xcor += w; 
+      }
+    }
     //You need to use a loop. You need to make the HEIGHT of the bars 
     //the values in the array.
     //Negative values are red, and go below the line.
     //Positive values are green and go above the line.
-    
-    float w = width / values.length; 
+
     //???WRITE THIS METHOD FIRST!!!
     //THESE ARE WRONG: They just illustrate how they could look
+    
+    /*
     fill(255, 0, 0);
     rect(x+40, y+100, 60, 50);
     fill(0, 255, 0);
     rect(x+120, y+50, 60, 50);
-
+    */
 
     //Width of the visualizer is 400!
 
@@ -71,5 +85,5 @@ void setup() {
 void draw() {
   background(255);
   v.display();
-  v.update();
+  //v.update();
 }
