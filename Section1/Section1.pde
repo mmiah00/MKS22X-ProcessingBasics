@@ -37,6 +37,7 @@ class Visualizer {
       float temp = abs (values[i]); 
       if (values[i] < 0) { 
         fill (255,0,0); 
+        rectMode (CORNERS); 
         rect (xcor, y - temp, w, temp); 
         xcor += w; 
       }
